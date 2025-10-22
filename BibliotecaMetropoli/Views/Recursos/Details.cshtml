@@ -1,0 +1,92 @@
+@model BibliotecaMetropoli.Models.Recurso
+
+@{
+    ViewData["Title"] = "Detalles del Recurso";
+}
+
+<h1>Detalles del Recurso</h1>
+<hr />
+
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4>@Model.Titulo</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Tipo de Recurso:</dt>
+                    <dd class="col-sm-8">
+                        <span class="badge badge-primary">@(Model.TipoRecurso?.Nombre ?? "N/A")</span>
+                    </dd>
+
+                    <dt class="col-sm-4">Año de Publicación:</dt>
+                    <dd class="col-sm-8">@Model.annopublic</dd>
+
+                    <dt class="col-sm-4">Edición:</dt>
+                    <dd class="col-sm-8">@(Model.Edicion ?? "N/A")</dd>
+
+                    <dt class="col-sm-4">Editorial:</dt>
+                    <dd class="col-sm-8">@(Model.Editorial?.Nombre ?? "N/A")</dd>
+
+                    <dt class="col-sm-4">País:</dt>
+                    <dd class="col-sm-8">@(Model.Pais?.Nombre ?? "N/A")</dd>
+                </dl>
+            </div>
+
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-4">Autores:</dt>
+                    <dd class="col-sm-8">
+                        @if (Model.AutoresRecursos != null && Model.AutoresRecursos.Any())
+                        {
+                        <ul class="list-unstyled">
+                            @foreach (var autorRecurso in Model.AutoresRecursos)
+                                {
+                            <li>
+                                @autorRecurso.Autor.Nombres @autorRecurso.Autor.Apellidos
+                                @if (autorRecurso.EsPrincipal)
+                                        {
+                                <span class="badge badge-success">Autor Principal</span>
+                                        }
+                            </li>
+                                }
+                        </ul>
+                        }
+                        else
+                        {
+                        <em>No hay autores asignados</em>
+                        }
+                    </dd>
+
+                    <dt class="col-sm-4">Palabras Clave:</dt>
+                    <dd class="col-sm-8">
+                        @if (!string.IsNullOrEmpty(Model.PalabrasBusqueda))
+                        {
+                        <span class="badge badge-info">@Model.PalabrasBusqueda</span>
+                        }
+                        else
+                        {
+                        <em>Sin palabras clave</em>
+                        }
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Descripcion))
+        {
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <h5>Descripción:</h5>
+                <p>@Model.Descripcion</p>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="card-footer">
+        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        <a asp-action="Buscar" class="btn btn-primary">Nueva Búsqueda</a>
+    </div>
+</div>

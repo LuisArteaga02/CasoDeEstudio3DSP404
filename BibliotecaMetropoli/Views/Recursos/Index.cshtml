@@ -1,0 +1,73 @@
+@model IEnumerable<BibliotecaMetropoli.Models.Recurso>
+
+    @{
+    ViewData["Title"] = "Recursos";
+    }
+
+    <h1>Recursos de la Biblioteca</h1>
+    <hr />
+
+    <div class="mb-3">
+        <a asp-action="Buscar" class="btn btn-primary">Búsqueda Avanzada</a>
+        <a asp-action="ListarPorTipo" class="btn btn-info">Filtrar por Tipo y Antigüedad</a>
+    </div>
+
+    @if (Model != null && Model.Any())
+{
+    <div class="alert alert-success" role="alert">
+        Total de recursos: <strong>@Model.Count()</strong>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autores</th>
+                <th>Editorial</th>
+                <th>Tipo</th>
+                <th>Año</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>
+                    @if (item.AutoresRecursos != null && item.AutoresRecursos.Any())
+                        {
+                            foreach (var autorRecurso in item.AutoresRecursos)
+                            {
+                    <span>
+                        @autorRecurso.Autor.Nombres @autorRecurso.Autor.Apellidos
+                    </span>
+                                if (autorRecurso.EsPrincipal)
+                                {
+                    <span class="badge badge-primary">Principal</span>
+                                }
+                    <br />
+                            }
+                        }
+                        else
+                        {
+                    <em>Sin autores</em>
+                        }
+                </td>
+                <td>@(item.Editorial?.Nombre ?? "N/A")</td>
+                <td>@(item.TipoRecurso?.Nombre ?? "N/A")</td>
+                <td>@item.annopublic</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.IdRec" class="btn btn-sm btn-info">Detalles</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No hay recursos registrados en el sistema.
+    </div>
+}

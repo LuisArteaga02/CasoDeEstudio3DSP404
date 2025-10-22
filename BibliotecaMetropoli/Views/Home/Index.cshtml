@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Pagina De inicio";
+}
+<style>
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 350px; 
+        padding: 20px;
+        min-height: 80vh;
+        background-color: #1A0089;
+        border-radius: 10px;
+        margin-bottom:20px;
+    }
+
+    .imgtxt {
+        flex: 1;
+        text-align: left;
+        max-width: 20%;
+    }
+
+        .imgtxt h1 {
+            font-size: 7rem;
+            font-weight: bold;
+            margin: 0;
+            line-height: 1;
+            color: #FFF3D6;
+        }
+
+
+    .banner {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .banner img {
+            height: 500px;
+            border-radius: 10px;
+        }
+        .card
+        {
+        background: #FFF3D6;
+        }
+</style>
+<div class="text-center">
+    <div class="container">
+        <div class="imgtxt">
+            <h1>Biblioteca</h1>
+            <h1>Metropoli</h1>
+        </div>
+        <div class="banner">
+            <img src="https://i.pinimg.com/736x/2b/18/26/2b18264b0841af0d0d157ec23f9bb976.jpg" class="banner">
+        </div>
+    </div>
+    <br />
+
+
+    <div class="card">
+        <div class="card-header">
+            Sobre nosotros
+        </div>
+        <div class="card-body">
+            <figure>
+                <blockquote class="blockquote">
+                    <p>somos una pequeña libreria ubicada en Alajuela, Costa Rica que trae las mejores experiencias a nuestros clientes y siempre buscamos el mejor servicio</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                  Biblioteca Metropoli
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <br />
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://img.freepik.com/free-photo/high-angle-people-reading-together_23-2150062128.jpg?semt=ais_hybrid&w=740&q=80" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://media.istockphoto.com/id/1957612313/photo/teenage-girl-sitting-on-windowsill-and-reading-a-book.jpg?s=612x612&w=0&k=20&c=5ffcOPYEmdP_r0yr0gPlb_nuVdipEdgG_SrtaeW_AIE=" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://media.istockphoto.com/id/623666368/photo/girl-reading-book-and-drinking-coffee-in-bed-in-the-morning.jpg?s=612x612&w=0&k=20&c=o6mC6iExPeV5QA1JIHVqYRrHCvIephYOfdlztt_hb2s=" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+        
+</div>
+

@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BibliotecaMetropoli</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BibliotecaMetropoli.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <style>
+        body {
+            background-color: #FFF3D6;
+            color: #B8CE52;
+            font-family: 'Franklin Gothic';
+        }
+
+        /* Estilos para la barra de navegación */
+        .navbar {
+            background-color: #1A0089 !important;
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .navbar-toggler-icon {
+            color: #FFF3D6 !important;
+        }
+
+        .dropdown-menu {
+            background-color: #FFF3D6;
+        }
+
+        .dropdown-item {
+            color: #B8CE52;
+        }
+
+            .dropdown-item:hover {
+                background-color: #1A0089;
+                color: #FFF3D6;
+            }
+
+        footer {
+           padding: 20px;
+           margin-top: 20px;
+            background-color: #FE5E32;
+            padding-bottom:100px;
+        }
+
+            footer h3 {
+                font-family: 'Arial', sans-serif;
+                padding-right: 20px;
+                margin: 0;
+                text-align: right;
+                color: #FFF3D6;
+                font-weight: bold;
+            }
+
+            footer p {
+                color: #FFF3D6;
+                padding-left: 20px;
+                margin: 0;
+                max-width: 30%;
+            }
+
+            footer h4 {
+                color: #FFF3D6;
+                padding-left: 20px;
+                margin: 0;
+                max-width: 30%;
+            }
+    </style>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BibliotecaMetropoli</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <!-- Menú de Recursos -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="recursosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Recursos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="recursosDropdown">
+                                <li><a class="dropdown-item" asp-controller="Recursos" asp-action="Index">Ver Todos los Recursos</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" asp-controller="Recursos" asp-action="Buscar">Búsqueda Avanzada</a></li>
+                                <li><a class="dropdown-item" asp-controller="Recursos" asp-action="ListarPorTipo">Filtrar por Tipo y Antigüedad</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Menú de Gestión -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="gestionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Gestión
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="gestionDropdown">
+                                <li><a class="dropdown-item" asp-controller="Autors" asp-action="Index">Autores</a></li>
+                                <li><a class="dropdown-item" asp-controller="Editorials" asp-action="Index">Editorials</a></li>
+                                <li><a class="dropdown-item" asp-controller="Pais" asp-action="Index">Países</a></li>
+                            </ul>
+                        </li>   
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        <h3>Biblioteca Metropoli 2025©</h3>
+        <h4>Fundadores</h4>
+        <p>Luis</p>
+        <p>Ever</p>
+        <p>Beatriz</p>
+        <p>Veronica</p>
+        <p>Ricardo</p>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,141 @@
+@model IEnumerable<BibliotecaMetropoli.Models.Recurso>
+
+    @{
+    ViewData["Title"] = "Materiales por Tipo y Antigüedad";
+    int? tipoSeleccionado = ViewBag.TipoSeleccionado;
+    int? aniosAntiguedad = ViewBag.AniosAntiguedad;
+    }
+
+    <h1>Materiales por Tipo y Antigüedad</h1>
+    <hr />
+
+    <!-- Formulario de Filtros -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Filtros de Búsqueda</h5>
+        </div>
+        <div class="card-body">
+            <form asp-action="ListarPorTipo" method="get">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Tipo de Recurso</label>
+                            <select name="idTipoR" class="form-control">
+                                <option value="">-- Todos los Tipos --</option>
+                                @foreach (var tipo in ViewBag.TiposRecurso)
+                            {
+                                <option value="@tipo.IdTipoR" selected="@(tipoSeleccionado == tipo.IdTipoR)">
+                                    @tipo.Nombre
+                                </option>
+                            }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Antigüedad (años)</label>
+                            <select name="aniosAntiguedad" class="form-control">
+                                <option value="">-- Todas las fechas --</option>
+                                <option value="5" selected="@(aniosAntiguedad == 5)">Últimos 5 años</option>
+                                <option value="10" selected="@(aniosAntiguedad == 10)">Últimos 10 años</option>
+                                <option value="15" selected="@(aniosAntiguedad == 15)">Últimos 15 años</option>
+                                <option value="20" selected="@(aniosAntiguedad == 20)">Últimos 20 años</option>
+                                <option value="50" selected="@(aniosAntiguedad == 50)">Últimos 50 años</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Aplicar Filtros</button>
+                    <a asp-action="ListarPorTipo" class="btn btn-secondary">Limpiar Filtros</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    @if (Model != null && Model.Any())
+{
+    <div class="alert alert-info" role="alert">
+        Se encontraron <strong>@Model.Count()</strong> recursos.
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            int antiguedad = DateTime.Now.Year - (item.annopublic ?? DateTime.Now.Year);
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0">@item.TipoRecurso?.Nombre</h6>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@item.Titulo</h5>
+
+                    <p class="card-text">
+                        <strong>Autores:</strong><br />
+                        @if (item.AutoresRecursos != null && item.AutoresRecursos.Any())
+                            {
+                        foreach (var autorRecurso in item.AutoresRecursos)
+                                {
+                        <span>
+                            @autorRecurso.Autor.Nombres @autorRecurso.Autor.Apellidos
+                            @if (autorRecurso.EsPrincipal)
+                                        {
+                            <span class="badge badge-success">Principal</span>
+                                        }
+                        </span>
+                        <br />
+                                }
+                            }
+                            else
+                            {
+                        <em>Sin autores</em>
+                            }
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Editorial:</strong> @(item.Editorial?.Nombre ?? "N/A")
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Año de Publicación:</strong> @item.annopublic
+                        <br />
+                        <span class="badge badge-info">Antigüedad: @antiguedad años</span>
+                    </p>
+
+                    @if (!string.IsNullOrEmpty(item.PalabrasBusqueda))
+                        {
+                    <p class="card-text">
+                        <strong>Palabras clave:</strong><br />
+                        <small class="text-muted">@item.PalabrasBusqueda</small>
+                    </p>
+                        }
+
+                    @if (!string.IsNullOrEmpty(item.Descripcion))
+                        {
+                    <p class="card-text">
+                        <small>@item.Descripcion</small>
+                    </p>
+                        }
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="Recursos" asp-action="Details" asp-route-id="@item.IdRec" class="btn btn-sm btn-info">Ver Detalles</a>
+                    <a asp-controller="Recursos" asp-action="Edit" asp-route-id="@item.IdRec" class="btn btn-sm btn-warning">Editar</a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        <strong>No se encontraron recursos.</strong> Intente modificar los filtros de búsqueda.
+    </div>
+}
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Volver al Inicio</a>
+    </div>

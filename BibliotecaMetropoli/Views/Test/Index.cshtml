@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Prueba de Conexión";
+}
+
+<div class="container mt-5">
+    <h2>Prueba de Conexión a Base de Datos</h2>
+
+    <div class="alert alert-info mt-4">
+        <h4>Resultado:</h4>
+        <p>@ViewBag.Message</p>
+        @if (ViewBag.InnerException != null)
+        {
+            <p><strong>Detalles técnicos:</strong> @ViewBag.InnerException</p>
+        }
+    </div>
+
+    <div class="mt-4">
+        <a href="/Test" class="btn btn-primary">Probar nuevamente</a>
+        <a href="/" class="btn btn-secondary">Volver al inicio</a>
+    </div>
+</div>

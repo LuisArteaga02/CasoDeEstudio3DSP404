@@ -1,0 +1,26 @@
+﻿@model List<BibliotecaMetropoli.Models.Recurso>
+@{
+    ViewBag.Title = "Materiales de tipo " + ViewBag.Tipo;
+}
+
+<h2>Materiales: @ViewBag.Tipo</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Año</th>
+            <th>Editorial</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Titulo</td>
+                <td>@m.annopublic</td>
+                <td>@(m.Editorial?.Nombre ?? "N/A")</td>
+            </tr>
+        }
+    </tbody>
+</table>
